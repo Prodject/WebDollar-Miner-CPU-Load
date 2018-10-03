@@ -23,7 +23,7 @@ if uname -r > /dev/null; then
 				if [[ -z $select_pool ]]; then echo "Waiting for [y/n]..." && sleep 3; else echo "Confirming pool selection [y]..." && screen -S $miner_screen_name -p 0 -X stuff "y^M" && echo "Miner started!"; break; fi
 			done
 		else
-			echo "CPU usage is: $cpu_usage"
+			echo "CPU usage is: $cpu_usage%"
 		fi
 		sleep 60
 	done
@@ -31,7 +31,7 @@ if uname -r > /dev/null; then
 elif [[ $(uname -r | cut -d '-' -f3) == Microsoft ]]; then # Windows 10 Ubuntu Subsystem
 
 	while true; do
-	cpu_usage=$(echo $((100-$(top -n 1 -b | awk '/^%Cpu/{print $2}'}))))
+	cpu_usage=$(echo "$(top -n 1 -b | awk '/^%Cpu/{printf "%.0f\n", $2}')")
 
 		if [[ $cpu_usage -le 25  ]]; then
 			echo "Low_CPU_usage_detected: $cpu_usage%"
@@ -48,7 +48,7 @@ elif [[ $(uname -r | cut -d '-' -f3) == Microsoft ]]; then # Windows 10 Ubuntu S
 				if [[ -z $select_pool ]]; then echo "Waiting for [y/n]..." && sleep 3; else echo "Confirming pool selection [y]..." && screen -S $miner_screen_name -p 0 -X stuff "y^M" && echo "Miner started!"; break; fi
 			done
 		else
-			echo "CPU usage is: $cpu_usage"
+			echo "CPU usage is: $cpu_usage%"
 		fi
 		sleep 60
 	done
