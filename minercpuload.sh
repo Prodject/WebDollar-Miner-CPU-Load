@@ -3,7 +3,7 @@
 miner_screen_name="MINER" # set this to your own screen name. if you don't have one, make one with: screen -S MINER
 miner_server_port="3335"
 
-if uname -r; then
+if uname -r > /dev/null; then
 
 	while true; do
 	cpu_usage=$(echo $((100-$(vmstat 1 2|tail -1|awk '{print $15}'))))
