@@ -31,7 +31,7 @@ if [[ ! $(uname -r | cut -d '-' -f3) == Microsoft ]]; then
 elif [[ $(uname -r | cut -d '-' -f3) == Microsoft ]]; then # Windows 10 Ubuntu Subsystem
 
 	while true; do
-	cpu_usage=$(echo "$(top -n 1 -b | awk '/^%Cpu/{printf "%.0f\n", $2}')")
+	cpu_usage=$(echo "$(top -d2 -n2 | awk '/^%Cpu/{printf "%.0f\n", $2}' | awk 'NR==2{print $1}')")
 
 		if [[ $cpu_usage -le 25  ]]; then
 			echo "Low_CPU_usage_detected: $cpu_usage%"
