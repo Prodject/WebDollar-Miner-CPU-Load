@@ -11,11 +11,11 @@ if [[ ! $(uname -r | cut -d '-' -f3) == Microsoft ]]; then
 		if [[ $cpu_usage -le 25  ]]; then
 			echo "Low_CPU_usage_detected: $cpu_usage%"
 			echo "Sending CTRL+C..." && screen -S $miner_screen_name -p 0 -X stuff "^C" && sleep 2
-			echo "Starting npm run commands..." && screen -S $miner_screen_name -p 0 -X stuff "SERVER_PORT=$miner_server_port npm run commands^M" && sleep 2
+			echo "Starting npm run commands..." && screen -S $miner_screen_name -p 0 -X stuff "SERVER_PORT=$miner_server_port npm run commands^M" && sleep 10
 
 			while :; do
 			cmd_pool=$(screen -x $miner_screen_name -X hardcopy /tmp/cmd_pool && cat /tmp/cmd_pool | grep Command: | tail -n 1)
-				if [[ -z $cmd_pool ]]; then echo "Waiting for [Command:]..." && sleep 1; else echo "Sending command 10..." && screen -S $miner_screen_name -p 0 -X stuff "10^M"; break; fi
+				if [[ -z $cmd_pool ]]; then echo "Waiting for [Command:]..." && sleep 1; else echo "Sending command 10..." && screen -S $miner_screen_name -p 0 -X stuff "10^M" && sleep 2; break; fi
 			done
 
 			while :; do
@@ -36,11 +36,11 @@ elif [[ $(uname -r | cut -d '-' -f3) == Microsoft ]]; then # Windows 10 Ubuntu S
 		if [[ $cpu_usage -le 25  ]]; then
 			echo "Low_CPU_usage_detected: $cpu_usage%"
 			echo "Sending CTRL+C..." && screen -S $miner_screen_name -p 0 -X stuff "^C" && sleep 2
-			echo "Starting npm run commands..." && screen -S $miner_screen_name -p 0 -X stuff "SERVER_PORT=$miner_server_port npm run commands^M" && sleep 2
+			echo "Starting npm run commands..." && screen -S $miner_screen_name -p 0 -X stuff "SERVER_PORT=$miner_server_port npm run commands^M" && sleep 10
 
 			while :; do
 			cmd_pool=$(screen -x $miner_screen_name -X hardcopy /tmp/cmd_pool && cat /tmp/cmd_pool | grep Command: | tail -n 1)
-				if [[ -z $cmd_pool ]]; then echo "Waiting for [Command:]..." && sleep 1; else echo "Sending command 10..." && screen -S $miner_screen_name -p 0 -X stuff "10^M"; break; fi
+				if [[ -z $cmd_pool ]]; then echo "Waiting for [Command:]..." && sleep 1; else echo "Sending command 10..." && screen -S $miner_screen_name -p 0 -X stuff "10^M" && sleep 2; break; fi
 			done
 
 			while :; do
