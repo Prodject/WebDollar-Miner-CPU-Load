@@ -17,4 +17,3 @@ ctrl a then d # to detach from Screen
 ### Info
 #### Script checks CPU load every 60 seconds - if CPU load is below or equal to 25%, WebDollar Miner will be restarted.
 
-<img src="https://webdollarvpn.io/img/minercpuload-git-image-432428.jpg" alt="WebDollar minercpuload.sh image 1"/>
